@@ -99,30 +99,28 @@ h1 {
   margin: 0;
 }
 
-/* CV Styling */
+
 section {
   margin: 2rem 0;
 }
 
 section h2 {
   color: #333;
-  border-bottom: 2px solid #333;  /* This adds the underline */
+  border-bottom: 2px solid #333; 
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
-/* Header styling */
+
 header p {
   color: #555;
   font-size: 1.1em;
 }
 
-/* Article spacing */
 article {
   margin-bottom: 1.5rem;
 }
 
-/* Job headers */
 article header {
   margin-bottom: 0.5rem;
 }
@@ -133,7 +131,6 @@ article header p {
   margin: 0;
 }
 
-/* List styling */
 ul {
   margin: 0;
   padding-left: 1.2rem;
@@ -143,16 +140,42 @@ li {
   margin-bottom: 0.5rem;
 }
 
-/* Project descriptions */
 #projects article p {
   margin-top: 0.5rem;
 }
 
-/* Skills section */
 #skills article {
   margin-bottom: 1rem;
 }
 
 #skills h3 {
   margin-bottom: 0.5rem;
+}
+
+:root {
+  --color-accent: oklch(65% 50% 0);
+  color-scheme: light dark;
+}
+
+nav {
+  --border-color: oklch(50% 10% 200 / 40%);
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+nav a.current {
+  border-bottom: 0.4em solid var(--border-color);
+  padding-bottom: calc(0.5em - 0.4em);
+}
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
+}
+
+input, textarea, button, select {
+  font: inherit;
 }
