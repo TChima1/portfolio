@@ -196,3 +196,127 @@ input, textarea, button, select {
   margin: 0;
   text-align: center;
 }
+.pie-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+#projects-pie-plot {
+  max-width: 20em;
+  overflow: visible;
+
+  path {
+      cursor: pointer;
+      transition: 300ms;
+      stroke: oklch(50% 0 0 / 10%);
+      stroke-width: 1px;
+  }
+
+  &:has(path:hover) {
+      path:not(:hover) {
+          opacity: 0.5;
+      }
+  }
+}
+
+.legend {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 1.5rem;
+  list-style: none;
+  border: 1px solid oklch(50% 0 0 / 20%);
+  border-radius: 6px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: 300ms;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.legend-item:hover {
+  background: oklch(50% 0 0 / 10%);
+}
+
+.swatch {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 4px;
+  background-color: var(--color);
+  border: 1px solid oklch(50% 0 0 / 10%);
+}
+
+.legend-item em {
+  color: #666;
+  font-style: normal;
+  margin-left: 0.25em;
+}
+
+.selected {
+  --color: oklch(65% 0.15 270) !important;
+
+  &:is(path) {
+      fill: var(--color);
+      stroke: oklch(100% 0 0 / 20%);
+      stroke-width: 2px;
+  }
+
+  &:is(.legend-item) {
+      background: oklch(50% 0 0 / 8%);
+  }
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .legend-item em {
+      color: #999;
+  }
+
+  .legend {
+      border-color: oklch(100% 0 0 / 10%);
+  }
+
+  .swatch {
+      border-color: oklch(100% 0 0 / 10%);
+  }
+
+  .legend-item:hover {
+      background: oklch(100% 0 0 / 5%);
+  }
+
+  .selected {
+      --color: oklch(75% 0.2 270) !important;
+
+      &:is(.legend-item) {
+          background: oklch(100% 0 0 / 8%);
+      }
+  }
+}
+.project-content {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.project-year {
+  font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  font-variant-numeric: oldstyle-nums;
+  color: #666;
+  font-size: 0.9em;
+}
+@media (prefers-color-scheme: dark) {
+  .project-year {
+      color: #999;
+  }
+}
