@@ -320,3 +320,51 @@ input, textarea, button, select {
       color: #999;
   }
 }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.stats dt {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.stats dd {
+  margin: 0;
+  font-size: 1.5em;
+  font-feature-settings: "tnum";
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .stats dt {
+      color: #ccc;
+  }
+  .stats dd {
+      color: #fff;
+  }
+}
+#chart {
+  margin: 2rem 0;
+}
+
+.gridlines line {
+  stroke: #ddd;
+  stroke-width: 1px;
+  stroke-dasharray: 2,2;
+}
+
+.gridlines path {
+  display: none;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .gridlines line {
+      stroke: #333;
+  }
+}
