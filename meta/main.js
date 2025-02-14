@@ -5,6 +5,34 @@ const width = 1000;
 const height = 600;
 const margin = { top: 10, right: 10, bottom: 30, left: 20 };
 
+function updateTooltipContent(commit) {
+    const link = document.getElementById('commit-link');
+    const date = document.getElementById('commit-date');
+    const time = document.getElementById('commit-time');
+    const author = document.getElementById('commit-author');
+    const lines = document.getElementById('commit-lines');
+
+    if (Object.keys(commit).length === 0) {
+        link.href = '';
+        link.textContent = '';
+        date.textContent = '';
+        time.textContent = '';
+        author.textContent = '';
+        lines.textContent = '';
+        return;
+    }
+
+    link.href = commit.url;
+    link.textContent = commit.id;
+    date.textContent = commit.datetime?.toLocaleString('en', {
+        dateStyle: 'full'
+    });
+    time.textContent = commit.time;
+    author.textContent = commit.author;
+    lines.textContent = commit.totalLines;
+}
+
+
 function processCommits() {
     commits = d3
         .groups(data, (d) => d.commit)
@@ -33,7 +61,16 @@ function processCommits() {
             return ret;
         });
 }
+function updateTooltipVisibility(isVisible) {
+    const tooltip = document.getElementById('commit-tooltip');
+    tooltip.hidden = !isVisible;
+}
 
+function updateTooltipPosition(event) {
+    const tooltip = document.getElementById('commit-tooltip');
+    tooltip.style.left = `${event.clientX + 10}px`; // Add offset to prevent tooltip from covering cursor
+    tooltip.style.top = `${event.clientY + 10}px`;
+}
 function createScatterplot() {
     const usableArea = {
         top: margin.top,
@@ -79,20 +116,28 @@ function createScatterplot() {
     const dots = svg.append('g').attr('class', 'dots');
 
     dots.selectAll('circle')
-        .data(commits)
-        .join('circle')
-        .attr('cx', (d) => xScale(d.datetime))
-        .attr('cy', (d) => yScale(d.hourFrac))
-        .attr('r', 5)
-        .attr('fill', d => {
-            const hour = d.hourFrac;
-            if (hour >= 6 && hour < 18) {
-                return 'oklch(70% 0.2 80)'; // Warm orange for daytime
-            } else {
-                return 'oklch(70% 0.2 250)'; // Cool blue for nighttime
-            }
-        });
-
+    .data(commits)
+    .join('circle')
+    .attr('cx', (d) => xScale(d.datetime))
+    .attr('cy', (d) => yScale(d.hourFrac))
+    .attr('r', 5)
+    .attr('fill', d => {
+        const hour = d.hourFrac;
+        if (hour >= 6 && hour < 18) {
+            return 'oklch(70% 0.2 80)'; // Warm orange for daytime
+        } else {
+            return 'oklch(70% 0.2 250)'; // Cool blue for nighttime
+        }
+    })
+    .on('mouseenter', (event, commit) => {
+        updateTooltipContent(commit);
+        updateTooltipVisibility(true);
+        updateTooltipPosition(event);
+    })
+    .on('mouseleave', () => {
+        updateTooltipContent({});
+        updateTooltipVisibility(false);
+    });
     // Add axes
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3
