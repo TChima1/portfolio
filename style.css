@@ -375,9 +375,13 @@ dl.info {
   gap: 0.5rem 1rem;
   margin: 0;
   padding: 1rem;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
 }
 
 dl.info dt {
@@ -387,8 +391,18 @@ dl.info dt {
 
 dl.info dd {
   margin: 0;
+}i am going t
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
 }
 
+.tooltip {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+}
 .tooltip {
   position: fixed;
   top: 1em;
@@ -426,5 +440,69 @@ circle:hover {
       background-color: rgba(30, 30, 30, 0.95);
       border-color: rgba(255, 255, 255, 0.1);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+circle.selected {
+  fill: #ff6b6b;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.stats dt {
+  font-weight: bold;
+  color: black;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.stats dd {
+  margin: 0;
+  font-size: 2rem;
+  font-feature-settings: "tnum";
+  color: black;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .stats dt {
+      color: white;
+  }
+  .stats dd {
+      color: white;
+  }
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.stats dt {
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.stats dd {
+  margin: 0;
+  font-size: 2rem;
+  font-feature-settings: "tnum";
+  color: #333;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .stats dt {
+      color: #999;
+  }
+  .stats dd {
+      color: #ccc;
   }
 }
