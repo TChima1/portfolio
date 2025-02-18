@@ -158,26 +158,26 @@ function createScatterplot() {
     d3.select(svg.node()).selectAll('.dots, .overlay ~ *').raise();
 }
 function displayStats() {
-    // Process commits first
+
     processCommits();
 
-    // Create the dl element
+
     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
     // Add total LOC
     dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
     dl.append('dd').text(data.length);
 
-    // Add total commits
+
     dl.append('dt').text('Total commits');
     dl.append('dd').text(commits.length);
 
-    // Number of files
+
     const numFiles = d3.group(data, d => d.file).size;
     dl.append('dt').text('Number of files');
     dl.append('dd').text(numFiles);
 
-    // Average line length
+
     const avgLineLength = d3.mean(data, d => d.length);
     dl.append('dt').text('Average line length');
     dl.append('dd').text(avgLineLength ? avgLineLength.toFixed(1) : 'N/A');
