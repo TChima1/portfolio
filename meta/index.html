@@ -9,15 +9,33 @@
     <script src="../global.js" type="module"></script>
     <script src="main.js" type="module"></script>
 </head>
+
 <body>
     <h1>Meta</h1>
     <p>Statistics and visualizations about this website's codebase.</p>
     
+    <h2>Commits Over Time</h2>
+    <div id="commits-scrollytelling">
+        <div id="commits-scroll-container">
+            <div id="commits-spacer"></div>
+            <div id="commits-items-container"></div>
+        </div>
+        <div id="chart"></div>
+    </div>
+
+    <h2>File Sizes Exploration</h2>
+    <div id="files-scrollytelling">
+        <div id="files-scroll-container">
+            <div id="files-spacer"></div>
+            <div id="files-items-container"></div>
+        </div>
+        <div id="files-visualization"></div>
+    </div>
+
     <div id="stats"></div>
 
     <h2>Commits by time of day</h2>
     <p id="selection-count">No commits selected</p>
-    <div id="chart"></div>
     <dl id="language-breakdown" class="stats"></dl>
 
     <dl id="commit-tooltip" class="info tooltip">
